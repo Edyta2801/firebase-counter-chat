@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 class Counter extends React.Component {
     state = {
         number: 0
@@ -10,18 +9,6 @@ class Counter extends React.Component {
     decHandler = () => this.setState({ number: this.state.number - 1 })
 
 
-    saveToFirebase = () => {
-        fetch(
-            'https://monday-482dc.firebaseio.com/counter.json',
-            {
-                method: 'PUT',
-                body: JSON.stringify(this.state.counter)
-            }
-        )
-    }
-    componentDiDUpdate() {
-        this.saveToFirebase()
-    }
 
 
 
