@@ -1,9 +1,8 @@
 import React from 'react';
-import Counter from './Counter'
+import Chat from './Chat'
 
 const App = () => (
-  <Counter
-    startNumber={0}
+  <Chat
   />
 )
 
