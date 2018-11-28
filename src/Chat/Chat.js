@@ -4,7 +4,10 @@ class Message extends React.Component {
     state = {
         newMessageText: 'krowa'
     }
-
+    onNewMessageTextChangeHandler=event=>(
+        this.setState({onNewMessageText:event.target.value})
+    )
+onNewMessageAddClickHandler=()=>{}
 
     render() {
         return (
@@ -12,9 +15,11 @@ class Message extends React.Component {
                 <input
                     type="text"
                     value={this.state.newMessageText}
-                    onChange={(event) => this.setState({ newMessageText: event.target.value })}
+                    onChange={this.onNewMessageTextChangeHandler}
                 />
-                <button>
+                <button
+                onClick={this.oneNewMessageAddClickHandler}
+                >
                 Add message!
                 </button>
             </div>
