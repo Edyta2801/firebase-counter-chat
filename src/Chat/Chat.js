@@ -1,10 +1,10 @@
-mport React from 'react'
+import React from 'react'
 
 import { database } from '../firebaseConfig'
 
 import NewMessageForm from './NewMessageForm'
 
-const dbMessagesRef = database.ref('/jfddl6-messages')
+const dbMessagesRef = database.ref('/Chat')
 
 class Chat extends React.Component {
   state = {
@@ -65,3 +65,4 @@ class Chat extends React.Component {
     )
   }
 }
+export default Chat
