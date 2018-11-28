@@ -1,30 +1,28 @@
 import React from 'react'
 
-class Message extends React.Component {
-    state = {
-        newMessageText: 'krowa'
-    }
-    onNewMessageTextChangeHandler=event=>(
-        this.setState({onNewMessageText:event.target.value})
+import NewMessageForm from './NewMessageForm'
+
+class Chat extends React.Component {
+  state = {
+    newMessageText: 'krowa'
+  }
+
+  onNewMessageTextChangeHandler = event => (
+    this.setState({ newMessageText: event.target.value })
+  )
+
+  onNewMessageAddClickHandler = () => {}
+
+  render() {
+    return (
+      <div>
+        <NewMessageForm 
+          newMessageText={this.state.newMessageText}
+          onNewMessageTextChangeHandler={this.onNewMessageTextChangeHandler}
+          onNewMessageAddClickHandler={this.onNewMessageAddClickHandler}
+        />
+      </div>
     )
-onNewMessageAddClickHandler=()=>{}
-
-    render() {
-        return (
-            <div>
-                <input
-                    type="text"
-                    value={this.state.newMessageText}
-                    onChange={this.onNewMessageTextChangeHandler}
-                />
-                <button
-                onClick={this.oneNewMessageAddClickHandler}
-                >
-                Add message!
-                </button>
-            </div>
-        )
-    }
+  }
 }
-
-export default Message
+export default Chat
