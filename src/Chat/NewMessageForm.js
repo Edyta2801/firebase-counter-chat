@@ -13,21 +13,25 @@ const NewMessageForm = (props) => (
       padding: 20,
       width: '100%',
       zIndex: 9999,
-  }}
+    }}
   >
-    <TextField
-      type="text"
-      name='message'
-      value={props.newMessageText}
-      onChange={props.onNewMessageTextChangeHandler}
-      fullWidth={true}
-    />
-    <RaisedButton
-      label={'Add message!'}
-      primary={true}
-      onClick={props.onNewMessageAddClickHandler}
-      fullWidth={true}
-    />
+    <form
+      onSubmit={props.onNewMessageAddClickHandler}
+    >
+      <TextField
+        type="text"
+        name='message'
+        value={props.newMessageText}
+        onChange={props.onNewMessageTextChangeHandler}
+        fullWidth={true}
+      />
+      <RaisedButton
+        label={'Add message!'}
+        primary={true}
+        onClick={props.onNewMessageAddClickHandler}
+        fullWidth={true}
+      />
+    </form>
   </Paper>
 )
 

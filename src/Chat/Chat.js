@@ -22,10 +22,10 @@ class Chat extends React.Component {
     )
   }
 
-  onDeleteMessageClickHandler=messageKey=>{
+  onDeleteMessageClickHandler = messageKey => {
     //database.ref(jfddl6'messages/${messagesKey}')
     dbMessagesRef.child(messageKey)
-    .remove()
+      .remove()
     //same thing- .set(null)
 
   }
@@ -38,7 +38,9 @@ class Chat extends React.Component {
     dbMessagesRef.off()
   }
 
-  onNewMessageAddClickHandler = () => {
+  onNewMessageAddClickHandler = event => {
+    event.preventDefault()
+
     dbMessagesRef.push({
       text: this.state.newMessageText,
       timestamp: Date.now()
