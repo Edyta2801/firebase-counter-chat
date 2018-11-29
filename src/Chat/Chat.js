@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 import { auth, database } from '../firebaseConfig'
@@ -18,8 +19,7 @@ class Chat extends React.Component {
     dbMessagesRef.on(
       'value',
       snapshot => this.setState({
-        messages: mapObjectToArray(snapshot.val()).reverse(),
-        newMessageText: ''
+        messages: mapObjectToArray(snapshot.val()).reverse()
       })
     )
   }
@@ -39,6 +39,10 @@ class Chat extends React.Component {
         displayName: auth.currentUser.displayName,
         img: auth.currentUser.photoURL || `https://api.adorable.io/avatars/50/${auth.currentUser.email}`
       }
+    })
+
+    this.setState({
+      newMessageText: ''
     })
   }
 
