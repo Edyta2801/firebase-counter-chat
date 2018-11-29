@@ -3,6 +3,7 @@ import React from 'react'
 import { auth } from '../firebaseConfig'
 
 import Forms from './Forms'
+import { googleProvider } from '../firebaseConfig'
 
 class Auth extends React.Component {
   state = {
@@ -32,11 +33,15 @@ class Auth extends React.Component {
 
   onLogInClick = () => {
     auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(console.log)
-      .then(console.log)
+      .catch(error => {
+        alert('Something is wrong! Check console for error details!')
+        console.log(error)
+      })
 
   }
-  onLogInByGoogleClick = () => { }
+  onLogInByGoogleClick = () => {
+    auth.signInWithPopup(googleProvider)
+  }
 
   render() {
     return (
