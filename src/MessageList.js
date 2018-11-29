@@ -8,7 +8,7 @@ const MessagesList = (props) => (
             props.messages.map(message => (
                 <ListItem
                     primaryText={message.text}
-                    secondaryText={message.timestamp}
+                    secondaryText={moment(message.timestamp).format('DD-MM-YYY hh:mm')}
                     key={message.key}
                 />
             ))
