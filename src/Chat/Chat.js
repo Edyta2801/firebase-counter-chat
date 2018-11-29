@@ -18,7 +18,7 @@ class Chat extends React.Component {
     dbMessagesRef.on(
       'value',
       snapshot => this.setState({
-        messages: mapObjectToArray(snapshot.val())
+        messages: mapObjectToArray(snapshot.val()).reverse()
       })
     )
   }
@@ -28,7 +28,16 @@ class Chat extends React.Component {
     this.setState({ newMessageText: event.target.value })
   )
 
+  componentWillUnmunt(){
+    dbMessagesRef.off()
+  }
 
+  onNewMessageAddClickHandler=()=>{
+    dbMessagesRef.push({
+      text:this.state.newMessageText,
+      timestamp:Date.now()
+    })
+  }
 
 
 
