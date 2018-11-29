@@ -3,6 +3,7 @@ import React from 'react'
 import { database } from '../firebaseConfig'
 import { mapObjectToArray } from '../utils'
 import NewMessageForm from './NewMessageForm'
+import MessagesList from '../MessageList';
 
 const dbMessagesRef = database.ref('/Chat')
 
@@ -12,9 +13,7 @@ class Chat extends React.Component {
     messages: []
   }
 
-
-
-  ComponentDidMount() {
+  componentDidMount() {
     dbMessagesRef.on(
       'value',
       snapshot => this.setState({
@@ -22,7 +21,6 @@ class Chat extends React.Component {
       })
     )
   }
-
 
   onNewMessageTextChangeHandler = event => (
     this.setState({ newMessageText: event.target.value })
@@ -39,74 +37,6 @@ class Chat extends React.Component {
     })
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // componentDidMount() {
-  //   dbMessagesRef.on(
-  //     'value',
-  //     snapshot => {
-  //       const messages = Object.entries(
-  //         snapshot.val()
-  //       ).map(entry => ({
-  //         ...entry[1],
-  //         key: entry[0]
-  //       }))
-
-  //       this.setState({ messages: messages })
-  //     }
-  //   )
-  // }
-
-  // componentWillUnmount(){
-  //   dbMessagesRef.off()
-  // }
-
-  // onNewMessageTextChangeHandler = event => (
-  //   this.setState({ newMessageText: event.target.value })
-  // )
-
-  // onNewMessageAddClickHandler = () => {
-  //   dbMessagesRef.push({
-  //     text: this.state.newMessageText,
-  //     timestamp: Date.now()
-  //   })
-  //   this.setState({ newMessageText: '' })
-  // }
-
   render() {
     return (
       <div>
@@ -114,6 +44,9 @@ class Chat extends React.Component {
           newMessageText={this.state.newMessageText}
           onNewMessageTextChangeHandler={this.onNewMessageTextChangeHandler}
           onNewMessageAddClickHandler={this.onNewMessageAddClickHandler}
+        />
+        <MessagesList
+          messages={this.state.messages}
         />
       </div>
     )

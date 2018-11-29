@@ -3,7 +3,7 @@ import React from 'react'
 const MessagesList =(props) =>(
     <div>
     {
-        this.state.messages.map(message => (
+        props.messages.map(message => (
           <div
             key={message.key}
           >
