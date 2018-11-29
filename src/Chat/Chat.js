@@ -7,7 +7,7 @@ import { mapObjectToArray } from '../utils'
 import NewMessageForm from './NewMessageForm'
 import MessagesList from './MessagesList'
 
-const dbMessagesRef = database.ref('/jfddl6-messages')
+const dbMessagesRef = database.ref('/chat-messages')
 
 class Chat extends React.Component {
   state = {
@@ -47,7 +47,7 @@ class Chat extends React.Component {
   }
 
   onDeleteMessageClickHandler = messageKey => {
-    // same thing - database.ref(`jfddl6-messages/${messageKey}`)
+    // same thing - database.ref(`Chat/${messageKey}`)
     dbMessagesRef.child(messageKey)
       .remove()
       // same thing - .set(null)
