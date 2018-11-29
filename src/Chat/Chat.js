@@ -22,6 +22,10 @@ class Chat extends React.Component {
     )
   }
 
+  onDeleteMessageClickHandler=messageKey=>{
+    
+  }
+
   onNewMessageTextChangeHandler = event => (
     this.setState({ newMessageText: event.target.value })
   )
@@ -47,6 +51,7 @@ class Chat extends React.Component {
         />
         <MessagesList
           messages={this.state.messages}
+          onDeleteMessageClickHandler={this.onDeleteMessageClickHandler}
         />
       </div>
     )
