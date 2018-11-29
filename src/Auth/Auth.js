@@ -1,11 +1,26 @@
 import React from 'react'
-import { Paper, TextField, RaisedButton } from 'material-ui';
+
+import { auth } from '../firebaseConfig'
+
+import Forms from './Forms'
 
 class Auth extends React.Component {
   state = {
     email: '',
-    password: ''
-    isUserLoggedIn:false
+    password: '',
+    isUserLoggedIn: false
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(
+      user => {
+        if (user) {
+          this.setState({ isUserLoggedIn: true })
+        } else {
+          this.setState({ isUserLoggedIn: false })
+        }
+      }
+    )
   }
 
   onEmailChangeHandler = event => {
@@ -15,49 +30,27 @@ class Auth extends React.Component {
     this.setState({ password: event.target.value })
   }
 
-  onLogInClick = () => { }
+  onLogInClick = () => {
+    auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(console.log)
+      .then(console.log)
+
+  }
   onLogInByGoogleClick = () => { }
 
   render() {
     return (
-      <Paper
-        style={{
-          margin: 20,
-          padding: 20
-        }}
-      >
-        <h2>Log in!</h2>
-        <TextField
-          name="email"
-          type="email"
-          floatingLabelText="E-mail"
-          value={this.state.email}
-          onChange={this.onEmailChangeHandler}
-          fullWidth={true}
+      this.state.isUserLoggedIn ?
+        this.props.children
+        :
+        <Forms
+          email={this.state.email}
+          onEmailChangeHandler={this.onEmailChangeHandler}
+          password={this.state.password}
+          onPasswordChangeHandler={this.onPasswordChangeHandler}
+          onLogInClick={this.onLogInClick}
+          onLogInByGoogleClick={this.onLogInByGoogleClick}
         />
-        <TextField
-          name="password"
-          type="password"
-          floatingLabelText="Password"
-          value={this.state.password}
-          onChange={this.onPasswordChangeHandler}
-          fullWidth={true}
-        />
-        <RaisedButton
-          style={{ margin: '5px 0' }}
-          label={'Log in'}
-          primary={true}
-          onClick={this.onLogInClick}
-          fullWidth={true}
-        />
-        <RaisedButton
-          style={{ margin: '5px 0' }}
-          label={'Log in y Google'}
-          secondary={true}
-          onClick={this.onLogInByGoogleClick}
-          fullWidth={true}
-        />
-      </Paper>
     )
   }
 }

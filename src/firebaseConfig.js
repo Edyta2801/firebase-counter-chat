@@ -1,15 +1,15 @@
 import firebase from 'firebase'
 
+const config = {
+  apiKey: "AIzaSyDDOwPtv46O8gP0f-RBsvT9nDp3yrRXxtQ",
+  authDomain: "ad-snadbox.firebaseapp.com",
+  databaseURL: "https://ad-snadbox.firebaseio.com",
+  projectId: "ad-snadbox",
+  storageBucket: "ad-snadbox.appspot.com",
+  messagingSenderId: "328854615659"
+}
 
+firebase.initializeApp(config)
 
-var config = {
-    apiKey: "AIzaSyDCg590r1u_J8fIl0D_YbH-fdXdvCQ94bI",
-    authDomain: "monday-482dc.firebaseapp.com",
-    databaseURL: "https://monday-482dc.firebaseio.com",
-    projectId: "monday-482dc",
-    storageBucket: "monday-482dc.appspot.com",
-    messagingSenderId: "583867079334"
-};
-firebase.initializeApp(config);
-
-export const database = firebase.database()  
+export const auth = firebase.auth()
+export const database = firebase.database()
