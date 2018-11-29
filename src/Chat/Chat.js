@@ -28,14 +28,14 @@ class Chat extends React.Component {
     this.setState({ newMessageText: event.target.value })
   )
 
-  componentWillUnmunt(){
+  componentWillUnmunt() {
     dbMessagesRef.off()
   }
 
-  onNewMessageAddClickHandler=()=>{
+  onNewMessageAddClickHandler = () => {
     dbMessagesRef.push({
-      text:this.state.newMessageText,
-      timestamp:Date.now()
+      text: this.state.newMessageText,
+      timestamp: Date.now()
     })
   }
 
@@ -115,15 +115,6 @@ class Chat extends React.Component {
           onNewMessageTextChangeHandler={this.onNewMessageTextChangeHandler}
           onNewMessageAddClickHandler={this.onNewMessageAddClickHandler}
         />
-        {
-          this.state.messages.map(message => (
-            <div
-              key={message.key}
-            >
-              {message.text}
-            </div>
-          ))
-        }
       </div>
     )
   }
