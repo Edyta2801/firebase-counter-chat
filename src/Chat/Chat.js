@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { database } from '../firebaseConfig'
-
+import { mapObjectToArray } from '../utils'
 import NewMessageForm from './NewMessageForm'
 
 const dbMessagesRef = database.ref('/Chat')
@@ -12,19 +12,21 @@ class Chat extends React.Component {
     messages: []
   }
 
-onNewMessageTextChangeHandler=()=>(
-this.setState({newMessageText:event.target.value})
-)
 
-ComponentDidMount(){
-  dbMessagesRef.on(
-    'value',
-    snapshot=>console.log(snapshot.val())
+
+  ComponentDidMount() {
+    dbMessagesRef.on(
+      'value',
+      snapshot => this.setState({
+        messages: mapObjectToArray(snapshot.val())
+      })
+    )
+  }
+
+
+  onNewMessageTextChangeHandler = event => (
+    this.setState({ newMessageText: event.target.value })
   )
-}
-
-
-
 
 
 
