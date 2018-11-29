@@ -1,17 +1,24 @@
 import React from 'react'
 import { Paper, TextField, RaisedButton } from 'material-ui';
- class Auth extends React.Component {
+
+class Auth extends React.Component {
   state = {
     email: '',
     password: ''
+    isUserLoggedIn:false
   }
-   onEmailChangeHandler = event => {
+
+  onEmailChangeHandler = event => {
     this.setState({ email: event.target.value })
   }
   onPasswordChangeHandler = event => {
     this.setState({ password: event.target.value })
   }
-   render() {
+
+  onLogInClick = () => { }
+  onLogInByGoogleClick = () => { }
+
+  render() {
     return (
       <Paper
         style={{
@@ -40,18 +47,18 @@ import { Paper, TextField, RaisedButton } from 'material-ui';
           style={{ margin: '5px 0' }}
           label={'Log in'}
           primary={true}
-          onClick={this.onLigInClick}
+          onClick={this.onLogInClick}
           fullWidth={true}
         />
         <RaisedButton
           style={{ margin: '5px 0' }}
           label={'Log in y Google'}
           secondary={true}
-          onClick={this.onLigInClick}
+          onClick={this.onLogInByGoogleClick}
           fullWidth={true}
         />
       </Paper>
     )
   }
 }
-export default Auth 
+export default Auth

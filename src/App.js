@@ -1,10 +1,12 @@
 import React from 'react'
-// import Chat from './Chat'
+import Chat from './Chat'
 import Auth from './Auth/Auth';
 
 const App = (props) => (
   <div>
-    <Auth />
+    <Auth >
+      <Chat />
+    </Auth>
   </div>
 )
 
