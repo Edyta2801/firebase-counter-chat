@@ -23,7 +23,11 @@ class Chat extends React.Component {
   }
 
   onDeleteMessageClickHandler=messageKey=>{
-    
+    //database.ref(jfddl6'messages/${messagesKey}')
+    dbMessagesRef.child(messageKey)
+    .remove()
+    //same thing- .set(null)
+
   }
 
   onNewMessageTextChangeHandler = event => (
