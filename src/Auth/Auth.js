@@ -1,9 +1,9 @@
 import React from 'react'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 
-import { auth } from '../firebaseConfig'
+import { auth, googleProvider } from '../firebaseConfig'
 
 import Forms from './Forms'
-import { googleProvider } from '../firebaseConfig'
 
 class Auth extends React.Component {
   state = {
@@ -14,6 +14,7 @@ class Auth extends React.Component {
 
   componentDidMount() {
     auth.onAuthStateChanged(
+      // user is an obj with users data or null when not logged in
       user => {
         if (user) {
           this.setState({ isUserLoggedIn: true })
@@ -37,16 +38,35 @@ class Auth extends React.Component {
         alert('Something is wrong! Check console for error details!')
         console.log(error)
       })
-
   }
+
   onLogInByGoogleClick = () => {
     auth.signInWithPopup(googleProvider)
+  }
+
+  onLogOutClickHandler = () => {
+    auth.signOut()
   }
 
   render() {
     return (
       this.state.isUserLoggedIn ?
-        this.props.children
+        <div>
+          <FloatingActionButton
+            style={{
+              position: 'fixed',
+              top: 10,
+              right: 10,
+              zIndex: 9999,
+              color: 'white'
+            }}
+            secondary={true}
+            onClick={this.onLogOutClickHandler}
+          >
+            X
+          </FloatingActionButton>
+          {this.props.children}
+        </div>
         :
         <Forms
           email={this.state.email}
