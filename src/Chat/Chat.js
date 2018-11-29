@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { database } from '../firebaseConfig'
+import { auth, database } from '../firebaseConfig'
 import { mapObjectToArray } from '../utils'
-import NewMessageForm from './NewMessageForm'
-import MessagesList from '../MessageList';
 
-const dbMessagesRef = database.ref('/Chat')
+import NewMessageForm from './NewMessageForm'
+import MessagesList from './MessagesList'
+
+const dbMessagesRef = database.ref('/jfddl6-messages')
 
 class Chat extends React.Component {
   state = {
@@ -17,24 +18,13 @@ class Chat extends React.Component {
     dbMessagesRef.on(
       'value',
       snapshot => this.setState({
-        messages: mapObjectToArray(snapshot.val()).reverse()
+        messages: mapObjectToArray(snapshot.val()).reverse(),
+        newMessageText: ''
       })
     )
   }
 
-  onDeleteMessageClickHandler = messageKey => {
-    //database.ref(jfddl6'messages/${messagesKey}')
-    dbMessagesRef.child(messageKey)
-      .remove()
-    //same thing- .set(null)
-
-  }
-
-  onNewMessageTextChangeHandler = event => (
-    this.setState({ newMessageText: event.target.value })
-  )
-
-  componentWillUnmunt() {
+  componentWillUnmount() {
     dbMessagesRef.off()
   }
 
@@ -43,9 +33,22 @@ class Chat extends React.Component {
 
     dbMessagesRef.push({
       text: this.state.newMessageText,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      author: {
+        email: auth.currentUser.email,
+        displayName: auth.currentUser.displayName
+      }
     })
   }
+
+  onDeleteMessageClickHandler = messageKey => {
+    // same thing - database.ref(`jfddl6-messages/${messageKey}`)
+    dbMessagesRef.child(messageKey)
+      .remove()
+      // same thing - .set(null)
+  }
+
+  onNewMessageTextChangeHandler = event => this.setState({ newMessageText: event.target.value })
 
   render() {
     return (
