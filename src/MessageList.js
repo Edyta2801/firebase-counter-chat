@@ -1,17 +1,19 @@
 import React from 'react'
+import { ListItem } from 'material-ui/List'
+import moment from 'moment'
 
-const MessagesList =(props) =>(
+const MessagesList = (props) => (
     <div>
-    {
-        props.messages.map(message => (
-          <div
-            key={message.key}
-          >
-            {message.text}
-          </div>
-        ))
-      }
-</div>
+        {
+            props.messages.map(message => (
+                <ListItem
+                    primaryText={message.text}
+                    secondaryText={message.timestamp}
+                    key={message.key}
+                />
+            ))
+        }
+    </div>
 )
 
 export default MessagesList
